@@ -1,0 +1,9 @@
+# Kibana is served by a back end server. This setting specifies the port to use.
+
+server.port: 5601
+server.host: your-vm-ip
+elasticsearch.hosts: "http://your-vm-ip:9200"
+elasticsearch.ssl.verificationMode: none
+elasticsearch.pingTimeout: 1500
+elasticsearch.requestTimeout: 30000
+logging.dest: /var/log/kibana/kibana.log

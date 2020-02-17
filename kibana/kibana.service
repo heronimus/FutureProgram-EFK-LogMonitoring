@@ -1,0 +1,14 @@
+[Unit]
+Description=Kibana
+Wants=elasticsearch.target
+After=elasticsearch.target
+
+[Service]
+User=futureprogram
+Group=futureprogram
+ExecStart=/opt/kibana/bin/kibana serve -l /var/log/kibana/kibana.log
+Restart=on-failure
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target

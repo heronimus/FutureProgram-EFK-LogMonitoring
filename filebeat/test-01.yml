@@ -1,0 +1,11 @@
+- type: log
+  enabled: true
+  paths:
+    - /opt/simple-app/log-app-01.log
+
+  fields:
+    app_name: simple-app-log-1
+
+  multiline.pattern: '^\['
+  multiline.negate: true
+  multiline.match: after

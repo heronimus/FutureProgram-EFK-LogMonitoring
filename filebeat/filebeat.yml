@@ -1,0 +1,36 @@
+filebeat.config.inputs:
+  enabled: true
+  path: ${path.config}/inputs.d/*.yml
+
+filebeat.config.modules:
+path: ${path.config}/modules.d/*.yml
+
+reload.enabled: true
+reload.period: 10s
+
+setup.ilm.enabled: false
+#setup.ilm.rollover_alias: filebeat
+#setup.ilm.policy_name: filebeat
+#setup.ilm.policy_file: ${path.config}/policy-file.json
+#setup.ilm.check_exists: true
+
+setup.template.enabled: true
+setup.template.name: "filebeat"
+setup.template.pattern: "filebeat-*"
+setup.template.overwrite: true
+setup.template.json.path: ${path.config}/index-template.json
+setup.template.json.name: filebeat-template
+setup.template.json.enabled: true
+
+name: app-01
+
+fields:
+  env: testing
+
+setup.kibana:
+  host: "192.168.0.XXX:5601"
+
+output.elasticsearch:
+  hosts: ["192.168.0.XXX:9200", "192.168.0.XXX:9200"]
+  loadbalance: true
+  index: "filebeat-%{[agent.version]}-%{[fields.env]}-%{[fields.app_name]}-%{+yyyy.MM}"
